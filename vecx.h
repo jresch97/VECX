@@ -75,7 +75,9 @@ VECX_EXPORT void NAME_LOWER ## _norm(NAME_LOWER vec, NAME_LOWER out) \
 { \
         SCALAR_T len = NAME_LOWER ## _len(vec); \
         \
-        if (len == ((SCALAR_T)0)) return; \
+        if (len == ((SCALAR_T)0)) { \
+                return; \
+        } \
         \
         for (int i = 0; i < N; i++) { \
                 out[i] = vec[i] / len; \

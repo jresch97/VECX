@@ -27,15 +27,15 @@
 
 #include <math.h>
 
-VECX(vec2f, 2, float, float, sqrtf, "%f")
-VECX(vec3f, 3, float, float, sqrtf, "%f")
-VECX(vec4f, 4, float, float, sqrtf, "%f")
+VECX(vec2f, _, 2, float, float, sqrtf, "%f")
+VECX(vec3f, _, 3, float, float, sqrtf, "%f")
+VECX(vec4f, _, 4, float, float, sqrtf, "%f")
 
-VECX(vec2d, 2, double, double, sqrt, "%lf")
-VECX(vec3d, 3, double, double, sqrt, "%lf")
-VECX(vec4d, 4, double, double, sqrt, "%lf")
+VECX(vec2d, _, 2, double, double, sqrt, "%lf")
+VECX(vec3d, _, 3, double, double, sqrt, "%lf")
+VECX(vec4d, _, 4, double, double, sqrt, "%lf")
 
-VECX_VEC3_HELPERS(vec3f, VEC3F, float)
-VECX_VEC3_HELPERS(vec3d, VEC3D, double)
+VECX_VEC3_HELPERS(vec3f, VEC3F, _, float)
+VECX_VEC3_HELPERS(vec3d, VEC3D, _, double)
 
 #endif

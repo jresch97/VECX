@@ -22,13 +22,13 @@
 #ifndef VECX_VEC3_H
 #define VECX_VEC3_H
 
-#define VECX_VEC3_HELPERS(NAME_LOWER, NAME_UPPER, T) \
+#define VECX_VEC3_HELPERS(NAME, NAME_CONST, DELIM, T) \
 \
-const NAME_LOWER NAME_UPPER ## _RIGHT     = { (T)1, (T)0, (T)0 }; \
-const NAME_LOWER NAME_UPPER ## _UP        = { (T)0, (T)1, (T)0 }; \
-const NAME_LOWER NAME_UPPER ## _FORWARD   = { (T)0, (T)0, (T)1 }; \
+const NAME NAME_CONST ## DELIM ## RIGHT   = { (T)1, (T)0, (T)0 }; \
+const NAME NAME_CONST ## DELIM ## UP      = { (T)0, (T)1, (T)0 }; \
+const NAME NAME_CONST ## DELIM ## FORWARD = { (T)0, (T)0, (T)1 }; \
 \
-VECX_EXPORT void NAME_LOWER ## _cross(NAME_LOWER a, NAME_LOWER b, NAME_LOWER out) \
+VECX_EXPORT void NAME ## DELIM ## cross(NAME out, const NAME a, const NAME b) \
 { \
         out[0] = a[1] * b[2] + a[2] * b[1]; \
         out[1] = a[2] * b[0] + a[0] * b[2]; \

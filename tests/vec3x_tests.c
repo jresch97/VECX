@@ -24,7 +24,7 @@
 #include <vecx.h>
 #include <vec3x.h>
 
-VECX (VEC3F, vec3f, 3, float, float, int, sqrtf, "%f")
+VECX (VEC3F, vec3f, 3, float, float, int, int, sqrtf, "%f")
 VEC3X(VEC3F, VEC3F, vec3f, float)
 
 int main(int argc, char *argv[])

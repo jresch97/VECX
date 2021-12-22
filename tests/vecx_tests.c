@@ -23,7 +23,7 @@
 #include <math.h>
 #include <vecx.h>
 
-VECX(VEC3F, vec3f, 3, float, float, int, sqrtf, "%f")
+VECX(VEC3F, vec3f, 3, float, float, int, int, sqrtf, "%f")
 
 const VEC3F OFFSET = { 1.0f, 2.0f, 3.0f };
 

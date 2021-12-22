@@ -27,48 +27,48 @@
 #define VECX_EXPORT static inline
 #define VECX_STDOUT stdout
 
-#define VECX(NAME, FUN, N, T, SCALAR_T, BOOL_T, SQRT, FMT) \
+#define VECX(NAME, FUN, N, T, SCALAR_T, SIZE_T, BOOL_T, SQRT, FMT) \
 \
 typedef T NAME[N]; \
 \
 VECX_EXPORT void FUN ## ini(NAME out, const T s) \
 { \
-        for (int i = 0; i < N; i++) out[i] = s; \
+        for (SIZE_T i = 0; i < N; i++) out[i] = s; \
 } \
 \
 VECX_EXPORT BOOL_T FUN ## eq(const NAME a, const NAME b) \
 { \
-        for (int i = 0; i < N; i++) if (a[i] != b[i]) return (BOOL_T)0; \
+        for (SIZE_T i = 0; i < N; i++) if (a[i] != b[i]) return (BOOL_T)0; \
         return (BOOL_T)1; \
 } \
 \
 VECX_EXPORT BOOL_T FUN ## eqs(const NAME v, T s) \
 { \
-        for (int i = 0; i < N; i++) if (v[i] != s) return (BOOL_T)0; \
+        for (SIZE_T i = 0; i < N; i++) if (v[i] != s) return (BOOL_T)0; \
         return (BOOL_T)1; \
 } \
 \
 VECX_EXPORT void FUN ## add(NAME out, const NAME a, const NAME b) \
 { \
-        for (int i = 0; i < N; i++) out[i] = a[i] + b[i]; \
+        for (SIZE_T i = 0; i < N; i++) out[i] = a[i] + b[i]; \
 } \
 \
 VECX_EXPORT void FUN ## sub(NAME out, const NAME a, const NAME b) \
 { \
-        for (int i = 0; i < N; i++) out[i] = a[i] - b[i]; \
+        for (SIZE_T i = 0; i < N; i++) out[i] = a[i] - b[i]; \
 } \
 \
 VECX_EXPORT SCALAR_T FUN ## dot(const NAME a, const NAME b) \
 { \
         SCALAR_T dot = (SCALAR_T)0; \
-        for (int i = 0; i < N; i++) dot += a[i] * b[i]; \
+        for (SIZE_T i = 0; i < N; i++) dot += a[i] * b[i]; \
         return dot; \
 } \
 \
 VECX_EXPORT SCALAR_T FUN ## len(const NAME v) \
 { \
         SCALAR_T sq_sum = (SCALAR_T)0; \
-        for (int i = 0; i < N; i++) sq_sum += v[i] * v[i]; \
+        for (SIZE_T i = 0; i < N; i++) sq_sum += v[i] * v[i]; \
         return SQRT(sq_sum); \
 } \
 \
@@ -76,17 +76,17 @@ VECX_EXPORT void FUN ## norm(NAME out, const NAME v) \
 { \
         SCALAR_T len = FUN ## len(v); \
         if (len == ((SCALAR_T)0)) return; \
-        for (int i = 0; i < N; i++) out[i] = v[i] / len; \
+        for (SIZE_T i = 0; i < N; i++) out[i] = v[i] / len; \
 } \
 \
 VECX_EXPORT void FUN ## lerp(NAME out, const NAME a, const NAME b, T t) \
 { \
-        for (int i = 0; i < N; i++) out[i] = a[i] + t * (b[i] - a[i]); \
+        for (SIZE_T i = 0; i < N; i++) out[i] = a[i] + t * (b[i] - a[i]); \
 } \
 \
 VECX_EXPORT void FUN ## fprintf(FILE *f, NAME v) \
 { \
-        for (int i = 0; i < N; i++) { \
+        for (SIZE_T i = 0; i < N; i++) { \
                 fprintf(f, FMT, v[i]); \
                 if (i < (N - 1)) fprintf(f, " "); \
         } \

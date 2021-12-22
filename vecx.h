@@ -25,67 +25,77 @@
 #include <stdio.h>
 
 #define VECX_EXPORT static inline
+#define VECX_STDOUT stdout
 
-#define VECX(NAME, DELIM, N, T, SCALAR_T, SQRT, SCALAR_FMT_STR) \
+#define VECX(NAME, FUN, N, T, SCALAR_T, BOOL_T, SQRT, FMT) \
 \
 typedef T NAME[N]; \
 \
-VECX_EXPORT void NAME ## DELIM ## init(NAME out, const T v) \
+VECX_EXPORT void FUN ## ini(NAME out, const T s) \
 { \
-        for (int i = 0; i < N; i++) out[i] = v; \
+        for (int i = 0; i < N; i++) out[i] = s; \
 } \
 \
-VECX_EXPORT void NAME ## DELIM ## add(NAME out, const NAME a, const NAME b) \
+VECX_EXPORT BOOL_T FUN ## eq(const NAME a, const NAME b) \
+{ \
+        for (int i = 0; i < N; i++) if (a[i] != b[i]) return (BOOL_T)0; \
+        return (BOOL_T)1; \
+} \
+\
+VECX_EXPORT BOOL_T FUN ## eqs(const NAME v, T s) \
+{ \
+        for (int i = 0; i < N; i++) if (v[i] != s) return (BOOL_T)0; \
+        return (BOOL_T)1; \
+} \
+\
+VECX_EXPORT void FUN ## add(NAME out, const NAME a, const NAME b) \
 { \
         for (int i = 0; i < N; i++) out[i] = a[i] + b[i]; \
 } \
 \
-VECX_EXPORT void NAME ## DELIM ## sub(NAME out, const NAME a, const NAME b) \
+VECX_EXPORT void FUN ## sub(NAME out, const NAME a, const NAME b) \
 { \
         for (int i = 0; i < N; i++) out[i] = a[i] - b[i]; \
 } \
 \
-VECX_EXPORT SCALAR_T NAME ## DELIM ## dot(const NAME a, const NAME b) \
+VECX_EXPORT SCALAR_T FUN ## dot(const NAME a, const NAME b) \
 { \
         SCALAR_T dot = (SCALAR_T)0; \
         for (int i = 0; i < N; i++) dot += a[i] * b[i]; \
         return dot; \
 } \
 \
-VECX_EXPORT SCALAR_T NAME ## DELIM ## len(const NAME v) \
+VECX_EXPORT SCALAR_T FUN ## len(const NAME v) \
 { \
         SCALAR_T sq_sum = (SCALAR_T)0; \
         for (int i = 0; i < N; i++) sq_sum += v[i] * v[i]; \
         return SQRT(sq_sum); \
 } \
 \
-VECX_EXPORT void NAME ## DELIM ## norm(NAME out, const NAME v) \
+VECX_EXPORT void FUN ## norm(NAME out, const NAME v) \
 { \
-        SCALAR_T len = NAME ## DELIM ## len(v); \
+        SCALAR_T len = FUN ## len(v); \
         if (len == ((SCALAR_T)0)) return; \
         for (int i = 0; i < N; i++) out[i] = v[i] / len; \
 } \
 \
-VECX_EXPORT void NAME ## DELIM ## lerp(NAME out, \
-                                       const NAME a, \
-                                       const NAME b, \
-                                       const T t) \
+VECX_EXPORT void FUN ## lerp(NAME out, const NAME a, const NAME b, T t) \
 { \
         for (int i = 0; i < N; i++) out[i] = a[i] + t * (b[i] - a[i]); \
 } \
 \
-VECX_EXPORT void NAME ## DELIM ## fprintf(FILE *f, NAME v) \
+VECX_EXPORT void FUN ## fprintf(FILE *f, NAME v) \
 { \
         for (int i = 0; i < N; i++) { \
-                fprintf(f, SCALAR_FMT_STR, v[i]); \
+                fprintf(f, FMT, v[i]); \
                 if (i < (N - 1)) fprintf(f, " "); \
         } \
         fprintf(f, "\n"); \
 } \
 \
-VECX_EXPORT void NAME ## DELIM ## printf(NAME v) \
+VECX_EXPORT void FUN ## printf(NAME v) \
 { \
-        NAME ## DELIM ## fprintf(stdout, v); \
+        FUN ## fprintf(stdout, v); \
 }
 
 #endif

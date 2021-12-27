@@ -24,11 +24,11 @@
 
 #define VEC3X(NAME, CONST, FUN, T) \
 \
-const NAME CONST ## RIGHT = { (T)1, (T)0, (T)0 }; \
-const NAME CONST ## UP    = { (T)0, (T)1, (T)0 }; \
-const NAME CONST ## FWD   = { (T)0, (T)0, (T)1 }; \
+NAME CONST ## RIGHT = { (T)1, (T)0, (T)0 }; \
+NAME CONST ## UP    = { (T)0, (T)1, (T)0 }; \
+NAME CONST ## FWD   = { (T)0, (T)0, (T)1 }; \
 \
-VECX_EXPORT void FUN ## cross(NAME out, const NAME a, const NAME b) \
+VECX_EXPORT void FUN ## cross(NAME out, NAME a, NAME b) \
 { \
         out[0] = a[1] * b[2] + a[2] * b[1]; \
         out[1] = a[2] * b[0] + a[0] * b[2]; \

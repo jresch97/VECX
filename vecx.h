@@ -31,55 +31,60 @@
 \
 typedef T NAME[N]; \
 \
-VECX_EXPORT void FUN ## ini(NAME out, const T s) \
+VECX_EXPORT void FUN ## init(NAME out, T s) \
 { \
         for (SIZE_T i = 0; i < N; i++) out[i] = s; \
 } \
 \
-VECX_EXPORT BOOL_T FUN ## eq(const NAME a, const NAME b) \
+VECX_EXPORT BOOL_T FUN ## eq(NAME a, NAME b) \
 { \
         for (SIZE_T i = 0; i < N; i++) if (a[i] != b[i]) return (BOOL_T)0; \
         return (BOOL_T)1; \
 } \
 \
-VECX_EXPORT BOOL_T FUN ## eqs(const NAME v, T s) \
+VECX_EXPORT BOOL_T FUN ## eqs(NAME v, T s) \
 { \
         for (SIZE_T i = 0; i < N; i++) if (v[i] != s) return (BOOL_T)0; \
         return (BOOL_T)1; \
 } \
 \
-VECX_EXPORT void FUN ## add(NAME out, const NAME a, const NAME b) \
+VECX_EXPORT void FUN ## add(NAME out, NAME a, NAME b) \
 { \
         for (SIZE_T i = 0; i < N; i++) out[i] = a[i] + b[i]; \
 } \
 \
-VECX_EXPORT void FUN ## sub(NAME out, const NAME a, const NAME b) \
+VECX_EXPORT void FUN ## sub(NAME out, NAME a, NAME b) \
 { \
         for (SIZE_T i = 0; i < N; i++) out[i] = a[i] - b[i]; \
 } \
 \
-VECX_EXPORT SCALAR_T FUN ## dot(const NAME a, const NAME b) \
+VECX_EXPORT void FUN ## scale(NAME out, NAME v, T s) \
+{ \
+        for (SIZE_T i = 0; i < N; i++) out[i] = v[i] * s; \
+} \
+\
+VECX_EXPORT SCALAR_T FUN ## dot(NAME a, NAME b) \
 { \
         SCALAR_T dot = (SCALAR_T)0; \
         for (SIZE_T i = 0; i < N; i++) dot += a[i] * b[i]; \
         return dot; \
 } \
 \
-VECX_EXPORT SCALAR_T FUN ## len(const NAME v) \
+VECX_EXPORT SCALAR_T FUN ## len(NAME v) \
 { \
         SCALAR_T sq_sum = (SCALAR_T)0; \
         for (SIZE_T i = 0; i < N; i++) sq_sum += v[i] * v[i]; \
         return SQRT(sq_sum); \
 } \
 \
-VECX_EXPORT void FUN ## norm(NAME out, const NAME v) \
+VECX_EXPORT void FUN ## norm(NAME out, NAME v) \
 { \
         SCALAR_T len = FUN ## len(v); \
         if (len == ((SCALAR_T)0)) return; \
         for (SIZE_T i = 0; i < N; i++) out[i] = v[i] / len; \
 } \
 \
-VECX_EXPORT void FUN ## lerp(NAME out, const NAME a, const NAME b, T t) \
+VECX_EXPORT void FUN ## lerp(NAME out, NAME a, NAME b, T t) \
 { \
         for (SIZE_T i = 0; i < N; i++) out[i] = a[i] + t * (b[i] - a[i]); \
 } \

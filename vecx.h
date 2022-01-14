@@ -33,69 +33,87 @@ typedef T NAME[N]; \
 \
 VECX_EXPORT void FUN ## init(NAME out, T s) \
 { \
-        for (SIZE_T i = 0; i < N; i++) out[i] = s; \
+        SIZE_T i;                           \
+        for (i = 0; i < N; i++) out[i] = s; \
 } \
 \
 VECX_EXPORT BOOL_T FUN ## eq(NAME a, NAME b) \
 { \
-        for (SIZE_T i = 0; i < N; i++) if (a[i] != b[i]) return (BOOL_T)0; \
-        return (BOOL_T)1; \
+        SIZE_T i;                                   \
+        for (i = 0; i < N; i++) {                   \
+                if (a[i] != b[i]) return (BOOL_T)0; \
+        }                                           \
+        return (BOOL_T)1;                           \
 } \
 \
 VECX_EXPORT BOOL_T FUN ## eqs(NAME v, T s) \
 { \
-        for (SIZE_T i = 0; i < N; i++) if (v[i] != s) return (BOOL_T)0; \
-        return (BOOL_T)1; \
+        SIZE_T i;                                \
+        for (i = 0; i < N; i++) {                \
+                if (v[i] != s) return (BOOL_T)0; \
+        }                                        \
+        return (BOOL_T)1;                        \
 } \
 \
 VECX_EXPORT void FUN ## add(NAME out, NAME a, NAME b) \
 { \
-        for (SIZE_T i = 0; i < N; i++) out[i] = a[i] + b[i]; \
+        SIZE_T i;                                     \
+        for (i = 0; i < N; i++) out[i] = a[i] + b[i]; \
 } \
 \
 VECX_EXPORT void FUN ## sub(NAME out, NAME a, NAME b) \
 { \
-        for (SIZE_T i = 0; i < N; i++) out[i] = a[i] - b[i]; \
+        SIZE_T i;                                     \
+        for (i = 0; i < N; i++) out[i] = a[i] - b[i]; \
 } \
 \
 VECX_EXPORT void FUN ## scale(NAME out, NAME v, T s) \
 { \
-        for (SIZE_T i = 0; i < N; i++) out[i] = v[i] * s; \
+        SIZE_T i;                                  \
+        for (i = 0; i < N; i++) out[i] = v[i] * s; \
 } \
 \
 VECX_EXPORT SCALAR_T FUN ## dot(NAME a, NAME b) \
 { \
-        SCALAR_T dot = (SCALAR_T)0; \
-        for (SIZE_T i = 0; i < N; i++) dot += a[i] * b[i]; \
-        return dot; \
+        SIZE_T   i;                                 \
+        SCALAR_T dot;                               \
+        dot = (SCALAR_T)0;                          \
+        for (i = 0; i < N; i++) dot += a[i] * b[i]; \
+        return dot;                                 \
 } \
 \
 VECX_EXPORT SCALAR_T FUN ## len(NAME v) \
 { \
-        SCALAR_T sq_sum = (SCALAR_T)0; \
-        for (SIZE_T i = 0; i < N; i++) sq_sum += v[i] * v[i]; \
-        return SQRT(sq_sum); \
+        SIZE_T   i;                                   \
+        SCALAR_T sqsum;                               \
+        sqsum = (SCALAR_T)0;                          \
+        for (i = 0; i < N; i++) sqsum += v[i] * v[i]; \
+        return SQRT(sqsum);                           \
 } \
 \
 VECX_EXPORT void FUN ## norm(NAME out, NAME v) \
 { \
-        SCALAR_T len = FUN ## len(v); \
-        if (len == ((SCALAR_T)0)) return; \
-        for (SIZE_T i = 0; i < N; i++) out[i] = v[i] / len; \
+        SIZE_T   i;                                  \
+        SCALAR_T len;                                \
+        len = FUN ## len(v);                         \
+        if (len == ((SCALAR_T)0)) return;            \
+        for (i = 0; i < N; i++) out[i] = v[i] / len; \
 } \
 \
 VECX_EXPORT void FUN ## lerp(NAME out, NAME a, NAME b, T t) \
 { \
-        for (SIZE_T i = 0; i < N; i++) out[i] = a[i] + t * (b[i] - a[i]); \
+        SIZE_T i;                                                  \
+        for (i = 0; i < N; i++) out[i] = a[i] + t * (b[i] - a[i]); \
 } \
 \
 VECX_EXPORT void FUN ## fprintf(FILE *f, NAME v) \
 { \
-        for (SIZE_T i = 0; i < N; i++) { \
-                fprintf(f, FMT, v[i]); \
+        SIZE_T i;                                 \
+        for (i = 0; i < N; i++) {                 \
+                fprintf(f, FMT, v[i]);            \
                 if (i < (N - 1)) fprintf(f, " "); \
-        } \
-        fprintf(f, "\n"); \
+        }                                         \
+        fprintf(f, "\n");                         \
 } \
 \
 VECX_EXPORT void FUN ## printf(NAME v) \
